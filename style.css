@@ -252,7 +252,7 @@ h1 {
 main {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     align-items: center;
 }
 
@@ -345,8 +345,33 @@ main {
     display: flex;
     gap: 20px;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     min-height: 150px;
+    max-height: 200px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.pieces-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.pieces-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.pieces-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.pieces-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .piece {
@@ -355,6 +380,8 @@ main {
     transition: transform 0.15s ease;
     position: relative;
     user-select: none;
+    flex-shrink: 0;
+    min-width: fit-content;
 }
 
 .piece:hover {
@@ -625,6 +652,17 @@ main {
         height: 28px;
     }
 
+    .pieces-container {
+        gap: 15px;
+        padding: 10px 15px;
+        max-height: 180px;
+        justify-content: flex-start;
+    }
+
+    .piece {
+        padding: 12px;
+    }
+
     .score-panel {
         gap: 10px;
     }
@@ -706,6 +744,16 @@ main {
     .piece-cell {
         width: 25px;
         height: 25px;
+    }
+
+    .pieces-container {
+        gap: 12px;
+        padding: 10px;
+        max-height: 160px;
+    }
+
+    .piece {
+        padding: 10px;
     }
 
     .block-types-grid {
