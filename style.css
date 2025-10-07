@@ -18,9 +18,10 @@ body {
 
 /* ハンバーガーメニューボタン */
 .menu-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    left: auto !important;
     width: 60px;
     height: 60px;
     background: rgba(255, 255, 255, 0.2);
@@ -34,6 +35,8 @@ body {
     justify-content: center;
     transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    padding: 0;
 }
 
 .menu-btn:hover {
@@ -48,9 +51,11 @@ body {
 
 /* メニューパネル */
 .menu-panel {
-    position: fixed;
-    top: 0;
-    right: -300px;
+    position: fixed !important;
+    top: 0 !important;
+    right: -300px !important;
+    left: auto !important;
+    bottom: auto !important;
     width: 300px;
     height: 100vh;
     background: rgba(255, 255, 255, 0.95);
@@ -59,10 +64,11 @@ body {
     z-index: 1001;
     transition: right 0.3s ease;
     padding: 80px 20px 20px;
+    margin: 0;
 }
 
 .menu-panel.open {
-    right: 0;
+    right: 0 !important;
 }
 
 .menu-close {
@@ -119,9 +125,11 @@ body {
 
 /* アンドゥボタン（右下固定） */
 .undo-floating-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    left: auto !important;
+    top: auto !important;
     width: 65px;
     height: 65px;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
@@ -134,6 +142,8 @@ body {
     justify-content: center;
     box-shadow: 0 6px 25px rgba(251, 191, 36, 0.4);
     transition: all 0.3s ease;
+    margin: 0;
+    padding: 0;
 }
 
 .undo-floating-btn:hover:not(:disabled) {
@@ -648,10 +658,11 @@ main {
     }
 
     .menu-btn {
-        width: 50px;
-        height: 50px;
-        top: 15px;
-        right: 15px;
+        width: 50px !important;
+        height: 50px !important;
+        top: 15px !important;
+        right: 15px !important;
+        left: auto !important;
     }
 
     .menu-icon {
@@ -659,14 +670,21 @@ main {
     }
 
     .menu-panel {
-        width: 280px;
+        width: 280px !important;
+        right: -280px !important;
+    }
+
+    .menu-panel.open {
+        right: 0 !important;
     }
 
     .undo-floating-btn {
-        width: 55px;
-        height: 55px;
-        bottom: 20px;
-        right: 20px;
+        width: 55px !important;
+        height: 55px !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        left: auto !important;
+        top: auto !important;
     }
 
     .undo-floating-btn .undo-icon {
@@ -698,6 +716,29 @@ main {
     .block-type-cell {
         width: 8px;
         height: 8px;
+    }
+
+    .menu-btn {
+        width: 45px !important;
+        height: 45px !important;
+        top: 10px !important;
+        right: 10px !important;
+    }
+
+    .menu-panel {
+        width: 260px !important;
+        right: -260px !important;
+    }
+
+    .undo-floating-btn {
+        width: 50px !important;
+        height: 50px !important;
+        bottom: 15px !important;
+        right: 15px !important;
+    }
+
+    .undo-floating-btn .undo-icon {
+        font-size: 1.5em;
     }
 }
 
