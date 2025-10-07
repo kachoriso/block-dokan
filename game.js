@@ -9,8 +9,8 @@ class Game {
         this.particleSystem = null;
         this.isDragging = false;
         this.draggedPiece = null;
-        this.history = []; // 状態履歴（最大5回分）
-        this.maxHistorySize = 5;
+        this.history = []; // 状態履歴（最大1回分）
+        this.maxHistorySize = 1;
         
         this.init();
     }
