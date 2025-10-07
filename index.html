@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブロザラシ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦭 ブロザラシ</h1>
+            <div class="score-panel">
+                <div class="score-item">
+                    <span class="label">スコア</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">最高記録</span>
+                    <span class="value" id="high-score">0</span>
+                </div>
+                <div class="score-item combo-display" id="combo-display">
+                    <span class="label">コンボ</span>
+                    <span class="value combo-value" id="combo">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="game-board-container">
+                <canvas id="particles" class="particles-canvas"></canvas>
+                <div class="game-board" id="game-board"></div>
+            </div>
+
+            <div class="pieces-container" id="pieces-container"></div>
+
+            <div class="controls">
+                <button class="btn btn-primary" id="new-game-btn">新しいゲーム</button>
+                <button class="btn btn-secondary" id="help-btn">遊び方</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- ゲームオーバーモーダル -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2>ゲームオーバー！</h2>
+            <p class="final-score">最終スコア: <span id="final-score">0</span></p>
+            <button class="btn btn-primary" id="restart-btn">もう一度遊ぶ</button>
+        </div>
+    </div>
+
+    <!-- ヘルプモーダル -->
+    <div class="modal" id="help-modal">
+        <div class="modal-content help-modal-content">
+            <h2>遊び方</h2>
+            <div class="help-content">
+                <p>📌 <strong>目的:</strong> ブロックを配置して行や列を揃えて消そう！</p>
+                <p>🎯 <strong>操作方法:</strong></p>
+                <ul>
+                    <li>下のブロックをドラッグしてボードに配置</li>
+                    <li>行または列が揃うと消えてスコア獲得</li>
+                    <li>複数ライン同時消しでコンボボーナス</li>
+                </ul>
+                <p>⚡ <strong>ゲームオーバー:</strong> ブロックが置けなくなったら終了</p>
+                <p>💡 <strong>ヒント:</strong> 空きスペースを作って長く続けよう！</p>
+                
+                <div class="block-types-section">
+                    <h3>🧩 ブロックの種類</h3>
+                    <div class="block-types-grid" id="block-types-grid"></div>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="close-help-btn">閉じる</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+
