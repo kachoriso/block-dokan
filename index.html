@@ -8,12 +8,12 @@
 </head>
 <body>
     <!-- ハンバーガーメニュー -->
-    <button class="menu-btn" id="menu-btn">
+    <button class="menu-btn" id="menu-btn" style="position:fixed;top:20px;right:20px;left:auto;z-index:1000;">
         <span class="menu-icon">☰</span>
     </button>
 
     <!-- メニューパネル -->
-    <div class="menu-panel" id="menu-panel">
+    <div class="menu-panel" id="menu-panel" style="position:fixed;top:0;right:-300px;left:auto;bottom:auto;z-index:1001;">
         <button class="menu-close" id="menu-close">✕</button>
         <div class="menu-items">
             <button class="menu-item" id="menu-new-game">
@@ -28,7 +28,7 @@
     </div>
 
     <!-- アンドゥボタン（右下固定） -->
-    <button class="undo-floating-btn" id="undo-btn" disabled title="1手戻る">
+    <button class="undo-floating-btn" id="undo-btn" disabled title="1手戻る" style="position:fixed;bottom:30px;right:30px;left:auto;top:auto;z-index:999;">
         <span class="undo-icon">↶</span>
     </button>
 
