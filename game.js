@@ -9,6 +9,8 @@ class Game {
         this.particleSystem = null;
         this.isDragging = false;
         this.draggedPiece = null;
+        this.history = []; // 状態履歴（最大5回分）
+        this.maxHistorySize = 5;
         
         this.init();
     }
@@ -19,6 +21,7 @@ class Game {
         this.generateNewPieces();
         this.updateScore();
         this.updateHighScore();
+        this.updateUndoButton(); // アンドゥボタンを初期化
         this.setupEventListeners();
     }
 
@@ -50,6 +53,7 @@ class Game {
         document.getElementById('restart-btn').addEventListener('click', () => this.restartGame());
         document.getElementById('help-btn').addEventListener('click', () => this.showHelp());
         document.getElementById('close-help-btn').addEventListener('click', () => this.closeHelp());
+        document.getElementById('undo-btn').addEventListener('click', () => this.undo());
         
         // モーダルの外側をクリックで閉じる
         document.getElementById('game-over-modal').addEventListener('click', (e) => {
@@ -240,6 +244,9 @@ class Game {
                 const col = mouseCol - centerOffset.col;
                 
                 if (this.canPlacePiece(piece, row, col)) {
+                    // 状態を保存（アンドゥ用）
+                    this.saveState(piece);
+                    
                     this.placePiece(piece, row, col);
                     piece.used = true;
                     pieceElement.classList.add('used');
@@ -566,6 +573,7 @@ class Game {
         this.score = 0;
         this.combo = 0;
         this.availablePieces = [];
+        this.history = []; // 履歴をクリア
         
         // ボードをリセット
         document.querySelectorAll('.cell').forEach(cell => {
@@ -578,6 +586,7 @@ class Game {
         this.generateNewPieces();
         this.updateScore();
         this.updateCombo();
+        this.updateUndoButton(); // アンドゥボタンを更新
     }
 
     restartGame() {
@@ -663,6 +672,97 @@ class Game {
 
     closeHelp() {
         document.getElementById('help-modal').classList.remove('show');
+    }
+
+    saveState(placedPiece) {
+        // 現在の状態をディープコピーして保存
+        const state = {
+            board: this.board.map(row => [...row]),
+            score: this.score,
+            combo: this.combo,
+            availablePieces: this.availablePieces.map(p => ({
+                shape: p.shape.map(row => [...row]),
+                used: p.used
+            })),
+            placedPiece: {
+                shape: placedPiece.shape.map(row => [...row])
+            }
+        };
+        
+        this.history.push(state);
+        
+        // 履歴が上限を超えたら古いものを削除
+        if (this.history.length > this.maxHistorySize) {
+            this.history.shift();
+        }
+        
+        this.updateUndoButton();
+    }
+
+    undo() {
+        if (this.history.length === 0) return;
+        
+        // 最後の状態を取得
+        const state = this.history.pop();
+        
+        // ボードを復元
+        this.board = state.board.map(row => [...row]);
+        this.score = state.score;
+        this.combo = state.combo;
+        
+        // ボードのビジュアルを更新
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                const cell = this.getCellElement(row, col);
+                if (this.board[row][col] === 1) {
+                    cell.classList.add('filled');
+                } else {
+                    cell.classList.remove('filled', 'clearing');
+                }
+            }
+        }
+        
+        // ピースを復元
+        const piecesContainer = document.getElementById('pieces-container');
+        piecesContainer.innerHTML = '';
+        
+        this.availablePieces = state.availablePieces.map(p => {
+            const piece = new Piece(p.shape);
+            piece.used = p.used;
+            return piece;
+        });
+        
+        this.availablePieces.forEach((piece, index) => {
+            const pieceElement = piece.createElement(index);
+            piecesContainer.appendChild(pieceElement);
+            this.setupPieceDrag(pieceElement, piece);
+        });
+        
+        // スコアとコンボを更新
+        this.updateScore();
+        this.updateCombo();
+        this.updateUndoButton();
+        
+        // エフェクト
+        this.particleSystem.createExplosion(
+            window.innerWidth / 2,
+            window.innerHeight / 2,
+            '#fbbf24',
+            15
+        );
+    }
+
+    updateUndoButton() {
+        const undoBtn = document.getElementById('undo-btn');
+        const undoCount = document.getElementById('undo-count');
+        
+        undoCount.textContent = `(${this.history.length})`;
+        
+        if (this.history.length > 0) {
+            undoBtn.disabled = false;
+        } else {
+            undoBtn.disabled = true;
+        }
     }
 }
 

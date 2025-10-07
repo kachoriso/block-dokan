@@ -37,6 +37,10 @@
             <div class="controls">
                 <button class="btn btn-primary" id="new-game-btn">新しいゲーム</button>
                 <button class="btn btn-secondary" id="help-btn">遊び方</button>
+                <button class="btn btn-undo" id="undo-btn" disabled>
+                    <span class="undo-icon">↶</span> 戻る
+                    <span class="undo-count" id="undo-count">(0)</span>
+                </button>
             </div>
         </main>
     </div>
@@ -61,9 +65,10 @@
                     <li>下のブロックをドラッグしてボードに配置</li>
                     <li>行または列が揃うと消えてスコア獲得</li>
                     <li>複数ライン同時消しでコンボボーナス</li>
+                    <li>「戻る」ボタンで最大5手前まで戻せる</li>
                 </ul>
                 <p>⚡ <strong>ゲームオーバー:</strong> ブロックが置けなくなったら終了</p>
-                <p>💡 <strong>ヒント:</strong> 空きスペースを作って長く続けよう！</p>
+                <p>💡 <strong>ヒント:</strong> 空きスペースを作って長く続けよう！失敗したらアンドゥで戻ろう！</p>
                 
                 <div class="block-types-section">
                     <h3>🧩 ブロックの種類</h3>

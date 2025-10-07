@@ -256,6 +256,7 @@ main {
     display: flex;
     gap: 15px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .btn {
@@ -290,6 +291,37 @@ main {
     backdrop-filter: blur(10px);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-undo {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-undo:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.btn-undo:disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.undo-icon {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.undo-count {
+    font-size: 0.85em;
+    opacity: 0.9;
 }
 
 .modal {
