@@ -7,6 +7,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- ハンバーガーメニュー -->
+    <button class="menu-btn" id="menu-btn">
+        <span class="menu-icon">☰</span>
+    </button>
+
+    <!-- メニューパネル -->
+    <div class="menu-panel" id="menu-panel">
+        <button class="menu-close" id="menu-close">✕</button>
+        <div class="menu-items">
+            <button class="menu-item" id="menu-new-game">
+                <span class="menu-item-icon">🎮</span>
+                <span class="menu-item-text">新しいゲーム</span>
+            </button>
+            <button class="menu-item" id="menu-help">
+                <span class="menu-item-icon">❓</span>
+                <span class="menu-item-text">遊び方</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- アンドゥボタン（右下固定） -->
+    <button class="undo-floating-btn" id="undo-btn" disabled title="1手戻る">
+        <span class="undo-icon">↶</span>
+    </button>
+
     <div class="container">
         <header>
             <h1>🦭 ブロザラシ</h1>
@@ -33,15 +58,6 @@
             </div>
 
             <div class="pieces-container" id="pieces-container"></div>
-
-            <div class="controls">
-                <button class="btn btn-primary" id="new-game-btn">新しいゲーム</button>
-                <button class="btn btn-secondary" id="help-btn">遊び方</button>
-                <button class="btn btn-undo" id="undo-btn" disabled>
-                    <span class="undo-icon">↶</span> 戻る
-                    <span class="undo-count" id="undo-count">(0)</span>
-                </button>
-            </div>
         </main>
     </div>
 

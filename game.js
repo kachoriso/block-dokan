@@ -49,10 +49,25 @@ class Game {
     }
 
     setupEventListeners() {
-        document.getElementById('new-game-btn').addEventListener('click', () => this.newGame());
+        // メニュー関連
+        document.getElementById('menu-btn').addEventListener('click', () => this.openMenu());
+        document.getElementById('menu-close').addEventListener('click', () => this.closeMenu());
+        document.getElementById('menu-new-game').addEventListener('click', () => {
+            this.newGame();
+            this.closeMenu();
+        });
+        document.getElementById('menu-help').addEventListener('click', () => {
+            this.showHelp();
+            this.closeMenu();
+        });
+        
+        // ゲームオーバーモーダル内のボタン
         document.getElementById('restart-btn').addEventListener('click', () => this.restartGame());
-        document.getElementById('help-btn').addEventListener('click', () => this.showHelp());
+        
+        // ヘルプモーダル
         document.getElementById('close-help-btn').addEventListener('click', () => this.closeHelp());
+        
+        // アンドゥボタン
         document.getElementById('undo-btn').addEventListener('click', () => this.undo());
         
         // モーダルの外側をクリックで閉じる
@@ -67,6 +82,21 @@ class Game {
                 this.closeHelp();
             }
         });
+        
+        // メニューパネルの外側をクリックで閉じる
+        document.getElementById('menu-panel').addEventListener('click', (e) => {
+            if (e.target.id === 'menu-panel') {
+                this.closeMenu();
+            }
+        });
+    }
+
+    openMenu() {
+        document.getElementById('menu-panel').classList.add('open');
+    }
+
+    closeMenu() {
+        document.getElementById('menu-panel').classList.remove('open');
     }
 
     generateNewPieces() {
@@ -754,9 +784,6 @@ class Game {
 
     updateUndoButton() {
         const undoBtn = document.getElementById('undo-btn');
-        const undoCount = document.getElementById('undo-count');
-        
-        undoCount.textContent = `(${this.history.length})`;
         
         if (this.history.length > 0) {
             undoBtn.disabled = false;
